@@ -13,7 +13,7 @@ export const getTherapyExercise = (region: string, level: number): TherapyExerci
   const defaultExercise: TherapyExercise = {
     region,
     level,
-    instruction: "Sigue el movimiento de la manera más suave posible.",
+    instruction: "Sigue el movimiento de manera muy suave y relajada.",
     animationProps: { duration: '4s', keyframesLeft: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(10deg) }' }
   };
 
@@ -22,16 +22,16 @@ export const getTherapyExercise = (region: string, level: number): TherapyExerci
   // ==========================================
   if (region === 'cervical') {
     const data: { [key: number]: any } = {
-      1: { instruction: "Micro-rotación. Mueve la cabeza apenitas. Piensa en seguridad.", duration: '6s', keyframesLeft: '0%, 100% { transform: rotate(-5deg) } 50% { transform: rotate(5deg) }' },
-      2: { instruction: "Lentamente mira de izquierda a derecha. Siente cómo se lubrican tus vértebras.", duration: '6s', keyframesLeft: '0%, 100% { transform: rotate(-10deg) } 50% { transform: rotate(10deg) }' },
-      3: { instruction: "No luches con la tensión. Gira gentilmente, sabiendo que no hay daño allí.", duration: '5s', keyframesLeft: '0%, 100% { transform: rotate(-15deg) } 50% { transform: rotate(15deg) }' },
-      4: { instruction: "Aumentamos el rango levemente. El movimiento constante drena el ácido acumulado.", duration: '5s', keyframesLeft: '0%, 100% { transform: rotate(-20deg) } 50% { transform: rotate(20deg) }' },
-      5: { instruction: "Oscilación segura. Siente confianza al mover músculos del cuello laterales.", duration: '4.5s', keyframesLeft: '0%, 100% { transform: rotate(-25deg) } 50% { transform: rotate(25deg) }' },
-      6: { instruction: "Sensibilización bajando. Rotación más amplia. Tus tejidos disfrutan el oxígeno.", duration: '4s', keyframesLeft: '0%, 100% { transform: rotate(-30deg) } 50% { transform: rotate(30deg) }' },
-      7: { instruction: "Mantenemos ritmo moderado relajando los hombros. No estás en peligro.", duration: '4s', keyframesLeft: '0%, 100% { transform: rotate(-35deg) } 50% { transform: rotate(35deg) }' },
-      8: { instruction: "Disfruta el movimiento, como si siguieras la letra de tu música favorita.", duration: '3.5s', keyframesLeft: '0%, 100% { transform: rotate(-40deg) } 50% { transform: rotate(40deg) }' },
-      9: { instruction: "Giramos con confianza plena. Tu cerebro de a poco olvida esa sobreprotección.", duration: '3s', keyframesLeft: '0%, 100% { transform: rotate(-45deg) } 50% { transform: rotate(45deg) }' },
-      10: { instruction: "Rotación activa completa. Hazle saber a tu cuello que ha sanado al 100%.", duration: '3s', keyframesLeft: '0%, 100% { transform: rotate(-50deg) } 50% { transform: rotate(50deg) }' },
+      1: { instruction: "Pequeño giro. Mueve la cabeza apenitas. Piensa que estás a salvo.", duration: '6s', keyframesLeft: '0%, 100% { transform: rotate(-5deg) } 50% { transform: rotate(5deg) }' },
+      2: { instruction: "Lentamente mira de izquierda a derecha. Siente cómo se relaja el cuello.", duration: '6s', keyframesLeft: '0%, 100% { transform: rotate(-10deg) } 50% { transform: rotate(10deg) }' },
+      3: { instruction: "No pelees contra la tensión. Gira despacito, sabiendo que no hay daño.", duration: '5s', keyframesLeft: '0%, 100% { transform: rotate(-15deg) } 50% { transform: rotate(15deg) }' },
+      4: { instruction: "Aumentamos el movimiento poquito a poco. Moverse quita la rigidez.", duration: '5s', keyframesLeft: '0%, 100% { transform: rotate(-20deg) } 50% { transform: rotate(20deg) }' },
+      5: { instruction: "Movimiento seguro y constante. Es normal si sientes algo raro, es solo costumbre.", duration: '4.5s', keyframesLeft: '0%, 100% { transform: rotate(-25deg) } 50% { transform: rotate(25deg) }' },
+      6: { instruction: "Tu cuerpo se acostumbra. Un movimiento más amplio lleva oxígeno a la zona.", duration: '4s', keyframesLeft: '0%, 100% { transform: rotate(-30deg) } 50% { transform: rotate(30deg) }' },
+      7: { instruction: "Llevamos un ritmo normal, recuerda bajar los hombros para relajarte.", duration: '4s', keyframesLeft: '0%, 100% { transform: rotate(-35deg) } 50% { transform: rotate(35deg) }' },
+      8: { instruction: "Disfruta el movimiento. Piensa en algo agradable, como tararear una canción.", duration: '3.5s', keyframesLeft: '0%, 100% { transform: rotate(-40deg) } 50% { transform: rotate(40deg) }' },
+      9: { instruction: "Giramos con más confianza. Tu cerebro de a poco olvida esa sobreprotección.", duration: '3s', keyframesLeft: '0%, 100% { transform: rotate(-45deg) } 50% { transform: rotate(45deg) }' },
+      10: { instruction: "Giro libre y natural. Hazle saber a tu cuello y cerebro que ya estás bien.", duration: '3s', keyframesLeft: '0%, 100% { transform: rotate(-50deg) } 50% { transform: rotate(50deg) }' },
     };
     if (data[level]) {
       return { ...defaultExercise, instruction: data[level].instruction, animationProps: { duration: data[level].duration, keyframesLeft: data[level].keyframesLeft } };
@@ -43,16 +43,16 @@ export const getTherapyExercise = (region: string, level: number): TherapyExerci
   // ==========================================
   if (region === 'hombro') {
     const d: { [key: number]: any } = {
-      1: { instruction: "Pequeñas elevaciones isométricas (10°). Solo actívalos.", duration: '5s', angle: 10 },
-      2: { instruction: "Levanta sutilmente hacia afuera (20°). Apagamos la alarma.", duration: '5s', angle: 20 },
-      3: { instruction: "Estiramiento lateral bajo (30°). Recuerda: dolor no es daño.", duration: '4.5s', angle: 30 },
-      4: { instruction: "Bombeo circulatorio (45°). Sangre fresca entra al maguito rotador.", duration: '4s', angle: 45 },
-      5: { instruction: "Llegamos a la altura media (60°). Confía en que tus hombros son fuertes.", duration: '4s', angle: 60 },
-      6: { instruction: "Avanzamos un poco más (75°). Alerta de peligro desactivándose.", duration: '4s', angle: 75 },
-      7: { instruction: "Brazos paralelos al piso (90°). Gran logro estructural, respira.", duration: '3.5s', angle: 90 },
-      8: { instruction: "Trata de sobrepasar tu hombro (110°). Siente agradable estiramiento.", duration: '3.5s', angle: 110 },
-      9: { instruction: "Movimiento de Mariposa (135°). Movimiento rítmico, fluidos corporales puros.", duration: '3s', angle: 135 },
-      10: { instruction: "Extensión total al cielo (160°). Festeja tu movilidad sin miedo.", duration: '3s', angle: 160 },
+      1: { instruction: "Pequeño intento de levantar los brazos. Solo actívalos, sin hacer fuerza.", duration: '5s', angle: 10 },
+      2: { instruction: "Levanta muy poquito hacia afuera. Le estamos diciendo al cerebro que confíe.", duration: '5s', angle: 20 },
+      3: { instruction: "Alcemos un poquito más. Recuerda: sentir estiramiento no significa romperse.", duration: '4.5s', angle: 30 },
+      4: { instruction: "Movimiento continuo y relajado. Entra sangre fresca a los músculos.", duration: '4s', angle: 45 },
+      5: { instruction: "Llegamos casi a la mitad. Confía en que tus hombros son muy fuertes.", duration: '4s', angle: 60 },
+      6: { instruction: "Avanzamos otro poquito. Esa señal falsa de peligro se está apagando.", duration: '4s', angle: 75 },
+      7: { instruction: "Brazos a la altura de los hombros. Gran logro, respira profundo y calmado.", duration: '3.5s', angle: 90 },
+      8: { instruction: "Intenta pasarlos más arriba. Conéctate con una sensación agradable de estirar.", duration: '3.5s', angle: 110 },
+      9: { instruction: "Movimiento amplio de alas. Levanta y baja con ritmo y confianza.", duration: '3s', angle: 135 },
+      10: { instruction: "Apunta directo al cielo. Celebra que te puedes mover sin aquel miedo.", duration: '3s', angle: 160 },
     };
     if (d[level]) {
       return { 
@@ -71,16 +71,16 @@ export const getTherapyExercise = (region: string, level: number): TherapyExerci
   // ==========================================
   if (region === 'lumbar') {
     const d: { [key: number]: any } = {
-      1: { instruction: "Inclinación puramente mental (-3°). Acompaña con respiración lenta.", duration: '6s', angle: -3 },
-      2: { instruction: "Mini-inclinación pélvica (-8°). Tu espalda no está rota.", duration: '6s', angle: -8 },
-      3: { instruction: "Baja la cabeza un poco (-15°). Tus discos sanan solos y velozmente.", duration: '5s', angle: -15 },
-      4: { instruction: "Pequeño estiramiento activo (-25°). Hidratamos evitando la acidez estática.", duration: '5s', angle: -25 },
-      5: { instruction: "Inclinación natural (-35°). Tus nuevos nervios se sienten a salvo.", duration: '4.5s', angle: -35 },
-      6: { instruction: "Hasta las rodillas (-45°). Tu cerebro redibuja tu mapa borroso.", duration: '4.5s', angle: -45 },
-      7: { instruction: "Largo alcance seguro (-55°). Fluye y no entres en modo lucha/huida.", duration: '4s', angle: -55 },
-      8: { instruction: "Busca la espinilla profunda (-65°). Piensa en un atardecer para desviar.", duration: '4s', angle: -65 },
-      9: { instruction: "Tocando tus tobillos (-75°). El movimiento ahora es loción analgésica.", duration: '3.5s', angle: -75 },
-      10: { instruction: "Apunta directo hacia tus pies (-85°). Una recaída no es fractura.", duration: '3.5s', angle: -85 },
+      1: { instruction: "Apenas agacha la cabeza y regresa. Piensa en respirar profundo, no hay prisa.", duration: '6s', angle: -3 },
+      2: { instruction: "Empieza a inclinarte milimétricamente. Tu espalda no está dañada ni rota.", duration: '6s', angle: -8 },
+      3: { instruction: "Baja un poco más. Cualquier molestia vieja es solo una alarma sensible.", duration: '5s', angle: -15 },
+      4: { instruction: "Pequeñas dobladas de espalda. Nos movemos lento para quitar la rigidez.", duration: '5s', angle: -25 },
+      5: { instruction: "Inclínate buscando tus rodillas. Tu cuerpo se da cuenta de que está seguro.", duration: '4.5s', angle: -35 },
+      6: { instruction: "Llegando a las rodillas. Tu cerebro vuelve a tener confianza en esta zona.", duration: '4.5s', angle: -45 },
+      7: { instruction: "Baja más largo y seguro. Déjate llevar suavemente sin ponerte tenso.", duration: '4s', angle: -55 },
+      8: { instruction: "Busca la mitad de la pierna. Imagina un lugar tranquilo para relajarte.", duration: '4s', angle: -65 },
+      9: { instruction: "Llegando hasta los tobillos. Moverse ahora es como una crema que alivia.", duration: '3.5s', angle: -75 },
+      10: { instruction: "Apunta directo hacia tus pies. Un tirón no significa volver a lastimarse.", duration: '3.5s', angle: -85 },
     };
     if (d[level]) {
        return { ...defaultExercise, instruction: d[level].instruction, animationProps: { duration: d[level].duration, keyframesLeft: `0%, 100% { transform: rotate(0) } 50% { transform: rotate(${d[level].angle}deg) }` }};
@@ -92,16 +92,16 @@ export const getTherapyExercise = (region: string, level: number): TherapyExerci
   // ==========================================
   if (region === 'cadera') {
     const d: { [key: number]: any } = {
-      1: { instruction: "Micro-oscilación pélvica (-5°). Despiertos tus glúteos.", duration: '6s', angle: -5 },
-      2: { instruction: "Peso lateral disimulado (-10°). El dolor es un falso guardián ahora.", duration: '5s', angle: -10 },
-      3: { instruction: "Bisagra de cadera suave (-15°). Tus cartílagos están intactos y fuertes.", duration: '5s', angle: -15 },
-      4: { instruction: "Inclinación en bloque (-25°). Quítale acidez de las ingles.", duration: '4.5s', angle: -25 },
-      5: { instruction: "Abre rango rítmico (-35°). Las creencias de rotura son ilusiones.", duration: '4s', angle: -35 },
-      6: { instruction: "Cede caderas y cae (-45°). Tu ciático goza de estos estiramientos.", duration: '4s', angle: -45 },
-      7: { instruction: "Rotación profunda (-55°). El descanso activo potencia tu farmacia opiácea.", duration: '4s', angle: -55 },
-      8: { instruction: "Rebote consciente (-65°). La música relajada de fondo te ayudará.", duration: '3.5s', angle: -65 },
-      9: { instruction: "Alcance completo a talones (-75°). Eres fuerte y capaz de cargar y moverte.", duration: '3.5s', angle: -75 },
-      10: { instruction: "Máxima flexión pélvica (-85°). Domina tus caderas sin anticipar daño.", duration: '3s', angle: -85 },
+      1: { instruction: "Mueve apenitas la cintura. Despertemos los músculos con mucho cuidado.", duration: '6s', angle: -5 },
+      2: { instruction: "Pequeño peso hacia adelante. Ese dolor asustadizo es solo una falsa alarma.", duration: '5s', angle: -10 },
+      3: { instruction: "Dóblate un poquito desde la cintura. Tus huesos están intactos y aguantan.", duration: '5s', angle: -15 },
+      4: { instruction: "Nos inclinamos de a partes. Esto ayuda a soltar la pesadez por estar sentado.", duration: '4.5s', angle: -25 },
+      5: { instruction: "Abre y cierra suavemente. Creer que estás frágil es una simple ilusión.", duration: '4s', angle: -35 },
+      6: { instruction: "Déjate caer más relajado. Ese tirón en la pierna agradece ser estirado.", duration: '4s', angle: -45 },
+      7: { instruction: "Dobla mucho más la postura. Moverse suave soltará medicinas de tu propio cuerpo.", duration: '4s', angle: -55 },
+      8: { instruction: "Sube y baja sin miedo. Poner música alegre en el fondo te servirá muchísimo.", duration: '3.5s', angle: -65 },
+      9: { instruction: "Baja todo tu cuerpo hasta abajo. Eres capaz de cargar peso y mover cosas.", duration: '3.5s', angle: -75 },
+      10: { instruction: "Dobla tu cintura por completo. Hazte dueño del movimiento libre de miedos.", duration: '3s', angle: -85 },
     };
     if (d[level]) {
        return { ...defaultExercise, instruction: d[level].instruction, animationProps: { duration: d[level].duration, keyframesLeft: `0%, 100% { transform: rotate(0) } 50% { transform: rotate(${d[level].angle}deg) }` }};
@@ -113,16 +113,16 @@ export const getTherapyExercise = (region: string, level: number): TherapyExerci
   // ==========================================
   if (region === 'tunel') {
     const d: { [key: number]: any } = {
-      1: { instruction: "Micro Nerve-Glide (±5°). Sube y baja de forma casi imperceptible.", duration: '4s', angle: 5 },
-      2: { instruction: "Aleteo basal (±10°). Sensación extraña no es daño real, tranquilo.", duration: '4s', angle: 10 },
-      3: { instruction: "Lento pero más largo (±15°). Terminaciones renovándose a velocidad luz.", duration: '4s', angle: 15 },
-      4: { instruction: "Avanzamos a ±20°. Tu antebrazo fluye sin causar presión al nervio.", duration: '3.5s', angle: 20 },
-      5: { instruction: "Expande el mapa de tu mano (±25°). Pensar positivo baja físicamente los picos eléctricos.", duration: '3.5s', angle: 25 },
-      6: { instruction: "Acelera levemente (±30°). Entrenas a tu cerebro de que ligamentos están estables.", duration: '3s', angle: 30 },
-      7: { instruction: "Deslizamiento asertivo (±35°). Suelta tus hombros y mandíbula para no sumar tensión.", duration: '3s', angle: 35 },
-      8: { instruction: "Gran alcance alto y bajo (±40°). La distracción externa ahora es medicina.", duration: '2.5s', angle: 40 },
-      9: { instruction: "Ritmo continuo fluido (±45°). Sientete a salvo. Tu tejido carpal reboza de salud.", duration: '2.5s', angle: 45 },
-      10: { instruction: "Libertad rotacional (±55°). Flexión acelerada celebrando el recableado sin límite.", duration: '2s', angle: 55 },
+      1: { instruction: "Mini movimiento. Sube y baja los dedos casi sin que se note. Muy relajado.", duration: '4s', angle: 5 },
+      2: { instruction: "Mueve la mano un poquito. Sentirse raro es muy normal al volver a empezar.", duration: '4s', angle: 10 },
+      3: { instruction: "Hagámoslo un poquitín más largo. Tu muñeca va recordando lo lindo de moverse.", duration: '4s', angle: 15 },
+      4: { instruction: "Avanzamos levantando más. Hazlo rítmico, como si aleteara un ave pequeña.", duration: '3.5s', angle: 20 },
+      5: { instruction: "Abre más el rango. Estar positivo apaga directamente esas corrientes eléctricas de molestia.", duration: '3.5s', angle: 25 },
+      6: { instruction: "Mueve con más entusiasmo. Le recuerdas al cuerpo que no vas a lastimar nada.", duration: '3s', angle: 30 },
+      7: { instruction: "Hazlo de manera más directa y segura. Cuidado con tensionar los hombros y el cuello.", duration: '3s', angle: 35 },
+      8: { instruction: "Dobla la mano hacia arriba y abajo. Mirar algo bonito mientras lo haces corta el dolor.", duration: '2.5s', angle: 40 },
+      9: { instruction: "Movimiento continuo y fluido. Sientete a salvo. Tu mano es una máquina perfecta.", duration: '2.5s', angle: 45 },
+      10: { instruction: "Movimiento libre y total. Flexiona arriba y abajo feliz de haber perdido el temor.", duration: '2s', angle: 55 },
     };
     if (d[level]) {
        return { ...defaultExercise, instruction: d[level].instruction, animationProps: { duration: d[level].duration, keyframesLeft: `0%, 100% { transform: rotate(0) } 25% { transform: rotate(-${d[level].angle}deg) } 75% { transform: rotate(${d[level].angle}deg) }` }};
