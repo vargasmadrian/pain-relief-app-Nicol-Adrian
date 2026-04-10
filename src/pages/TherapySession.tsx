@@ -16,14 +16,12 @@ export default function TherapySession() {
   const [timeRemaining, setTimeRemaining] = useState(0); // in seconds
   const [totalTime, setTotalTime] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
-  const [finalPain, setFinalPain] = useState(painLevel);
 
   useEffect(() => {
     // 1. Cargar datos de la sesión guardados en el Local/Session Storage
     const savedLevel = sessionStorage.getItem('painLevel');
     const pLevel = savedLevel ? parseInt(savedLevel, 10) : 5;
     setPainLevel(pLevel);
-    setFinalPain(pLevel);
 
     const savedArea = sessionStorage.getItem('painLocation');
     if (savedArea) setArea(savedArea);
@@ -70,7 +68,16 @@ export default function TherapySession() {
     return ((totalTime - timeRemaining) / totalTime) * 100;
   };
 
+  const [quizAnswer, setQuizAnswer] = useState<number | null>(null);
+  const [hospitalLockout, setHospitalLockout] = useState(false);
+
   const handleGlobalFinish = () => {
+    if (quizAnswer === null) return;
+    if (quizAnswer === 3) {
+      setHospitalLockout(true);
+      return;
+    }
+
     const currentUnlocked = parseInt(sessionStorage.getItem('unlockedLevel') || '1');
     const thisLevel = parseInt(level || '1');
     if (thisLevel >= currentUnlocked && thisLevel < 10) {
@@ -79,37 +86,70 @@ export default function TherapySession() {
     navigate('/levels');
   };
 
+  if (hospitalLockout) {
+    return (
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="page-container">
+        <div className="glass-panel" style={{ padding: '2rem', flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ background: 'rgba(255, 60, 60, 0.15)', border: '1px solid var(--danger)', padding: '1.5rem', borderRadius: '12px', textAlign: 'center' }}>
+             <h3 style={{ color: 'var(--danger)', margin: '0 0 1rem 0' }}>Atención Médica Requerida</h3>
+             <p style={{ margin: 0, fontSize: '1rem', color: '#fff' }}>
+               Elegiste la opción de dolor extremo. Por seguridad de tu integridad física interrrumpimos la terapia. Es indispensable acudir a urgencias para descartar daño agudo severo.
+             </p>
+          </div>
+          <button className="btn-secondary" onClick={() => navigate('/')} style={{ marginTop: '2rem', width: '100%' }}>
+            Volver al inicio
+          </button>
+        </div>
+      </motion.div>
+    );
+  }
+
   if (isFinished) {
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="page-container">
         <div className="glass-panel" style={{ padding: '2rem', flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-          <CheckCircle size={64} color="var(--success)" style={{ marginBottom: '1.5rem' }} />
-          <h2>¡Excelente trabajo!</h2>
-          <p style={{ textAlign: 'center', marginBottom: '2rem' }}>
-            El movimiento suave le ha dicho a tu cerebro que esta zona es segura.
+          <CheckCircle size={48} color="var(--success)" style={{ marginBottom: '1rem' }} />
+          <h2 style={{ marginBottom: '0.5rem' }}>¡Nivel completado!</h2>
+          <p style={{ textAlign: 'center', marginBottom: '2rem', fontSize: '0.9rem' }}>
+            Para evaluar tu progreso neuro-físico, responde lo siguiente basándote en lo que acabas de hacer:
           </p>
 
-          <div style={{ width: '100%', marginBottom: '2rem' }}>
-             <p style={{ textAlign: 'center', color: 'white' }}>¿Cómo te sientes ahora? (EVA)</p>
-             <input 
-                type="range" 
-                min="1" 
-                max="10" 
-                value={finalPain}
-                onChange={(e) => setFinalPain(parseInt(e.target.value))}
-                className="pain-slider"
-                style={{ 
-                  background: `linear-gradient(to right, var(--success) 0%, var(--warning) 50%, var(--danger) 100%)`,
-                  marginTop: '1rem'
-                }}
-              />
-              <div style={{ textAlign: 'center', marginTop: '1rem', fontSize: '1.5rem', fontWeight: 'bold' }}>
-                {finalPain} / 10
-              </div>
+          <div style={{ width: '100%', marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+             <p style={{ textAlign: 'center', color: 'var(--accent-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>
+               ¿Cómo sentiste tus músculos y articulaciones en este nivel?
+             </p>
+
+             <button 
+                onClick={() => setQuizAnswer(1)}
+                className="btn-secondary"
+                style={{ background: quizAnswer === 1 ? 'var(--accent-primary)' : 'rgba(255,255,255,0.05)', textAlign: 'left', padding: '1rem' }}
+             >
+               <strong>A)</strong> Sentí tensión y rareza, pero entiendo que no significa daño tisular.
+             </button>
+
+             <button 
+                onClick={() => setQuizAnswer(2)}
+                className="btn-secondary"
+                style={{ background: quizAnswer === 2 ? 'var(--accent-primary)' : 'rgba(255,255,255,0.05)', textAlign: 'left', padding: '1rem' }}
+             >
+               <strong>B)</strong> Muy normal, casi no sentí ninguna limitación o alarma física.
+             </button>
+
+             <button 
+                onClick={() => setQuizAnswer(3)}
+                className="btn-secondary"
+                style={{ background: quizAnswer === 3 ? 'var(--danger)' : 'rgba(255,255,255,0.05)', textAlign: 'left', padding: '1rem' }}
+             >
+               <strong>C)</strong> Sentí un dolor extremo de 10/10 completamente insoportable.
+             </button>
           </div>
 
-          <button onClick={handleGlobalFinish} style={{ width: '100%' }}>
-            Finalizar Sesión
+          <button 
+            onClick={handleGlobalFinish} 
+            disabled={quizAnswer === null}
+            style={{ width: '100%', opacity: quizAnswer === null ? 0.5 : 1 }}
+          >
+            Guardar y Continuar
           </button>
         </div>
       </motion.div>

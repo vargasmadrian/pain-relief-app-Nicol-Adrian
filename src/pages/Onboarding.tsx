@@ -112,16 +112,30 @@ export default function Onboarding() {
           </motion.div>
         )}
 
-        <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'flex-end' }}>
-          <button 
-            disabled={!selectedPart} 
-            onClick={handleContinue}
-            style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%', justifyContent: 'center' }}
-          >
-            Continuar
-            <ArrowRight size={20} />
-          </button>
-        </div>
+        {selectedPart && painLevel === 10 ? (
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            style={{ marginTop: 'auto', background: 'rgba(255, 60, 60, 0.15)', border: '1px solid var(--danger)', padding: '1.2rem', borderRadius: '12px', textAlign: 'center' }}>
+             <h3 style={{ color: 'var(--danger)', margin: '0 0 0.5rem 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+               Atención Médica Requerida
+             </h3>
+             <p style={{ margin: 0, fontSize: '0.95rem', color: '#fff' }}>
+               Por seguridad de tu salud, con un nivel de dolor de 10/10 es indispensable acudir a urgencias para descartar complicaciones agudas antes de realizar terapia física.
+             </p>
+          </motion.div>
+        ) : (
+          <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'flex-end' }}>
+            <button 
+              disabled={!selectedPart} 
+              onClick={handleContinue}
+              style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%', justifyContent: 'center' }}
+            >
+              Continuar
+              <ArrowRight size={20} />
+            </button>
+          </div>
+        )}
       </div>
     </motion.div>
   );
