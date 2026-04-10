@@ -126,87 +126,91 @@ export default function TherapySession() {
       exit={{ opacity: 0, x: -20 }}
       className="page-container"
     >
-      <div className="glass-panel" style={{ padding: '2rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <div className="glass-panel" style={{ padding: '1rem 1.5rem', flex: 1, display: 'flex', flexDirection: 'column', height: '100%' }}>
         
-        <button className="btn-secondary" onClick={() => navigate(-1)} style={{ alignSelf: 'flex-start', padding: '0.5rem', marginBottom: '1rem', border: 'none' }}>
+        {/* HEADER MOOVI */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+          <button className="btn-secondary" onClick={() => navigate(-1)} style={{ padding: '0.5rem', border: 'none', background: 'transparent' }}>
             <ArrowLeft size={24} />
-        </button>
-
-        <div style={{ textAlign: 'center', marginBottom: '0.5rem' }}>
-          <h2 style={{ textTransform: 'capitalize' }}>Nivel {level} - {area}</h2>
-          <p style={{ color: 'var(--accent-primary)', fontWeight: 500 }}>
-            {painLevel > 5 ? 'Sesión suave y reducida. Imita a "Moovi" sin excederte.' : 'Sesión activa. Sigue el ritmo del entrenador virtual.'}
-          </p>
+          </button>
+          <div style={{ textAlign: 'center', flex: 1 }}>
+            <h3 style={{ textTransform: 'capitalize', margin: 0, fontSize: '1.2rem' }}>Nivel {level} - {area}</h3>
+            <span style={{ color: 'var(--accent-primary)', fontSize: '0.8rem' }}>
+              {painLevel > 5 ? 'Sesión suave' : 'Sesión activa'}
+            </span>
+          </div>
+          <div style={{ width: 40 }} /> {/* Spacer */}
         </div>
 
         {/* --- AVATAR INTERACTIVO --- */}
-        <div className="avatar-container" style={{ margin: '0 auto 1.5rem', height: '320px', width: '100%' }}>
+        <div className="avatar-container" style={{ margin: '0 auto 0.5rem', height: '220px', width: '100%' }}>
           <InteractiveAvatar 
             selectedZone={area} 
-            level={parseInt(level || '1')}
+            level={numericLevel}
             isTherapyMode={true}
           />
         </div>
 
         {/* FEEDBACK CLÍNICO (INSTRUCCIÓN) */}
-        <div style={{ textAlign: 'center', marginBottom: '1rem', padding: '0 1rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '0.5rem', padding: '0 0.5rem' }}>
            <p style={{ 
                color: 'white', 
-               fontSize: '1.2rem', 
+               fontSize: '0.95rem', 
                backgroundColor: 'rgba(255,255,255,0.05)', 
-               padding: '1rem', 
+               padding: '0.75rem', 
                borderRadius: '12px',
-               border: '1px solid rgba(255,255,255,0.1)'
+               border: '1px solid rgba(255,255,255,0.1)',
+               margin: 0
            }}>
              {sessionExercise.instruction}
            </p>
         </div>
 
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+        {/* CONTROLES Y TIMER */}
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: '2rem', marginTop: 'auto', marginBottom: 'auto' }}>
           
-          <div style={{ position: 'relative', width: '200px', height: '200px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <div style={{ position: 'relative', width: '110px', height: '110px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             {/* Progress circle */}
             <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', transform: 'rotate(-90deg)' }}>
               <circle 
-                cx="100" cy="100" r="90" 
-                fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="8"
+                cx="55" cy="55" r="50" 
+                fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="6"
               />
               <circle 
-                cx="100" cy="100" r="90" 
-                fill="none" stroke="var(--accent-primary)" strokeWidth="8"
-                strokeDasharray="565"
-                strokeDashoffset={565 - (565 * getProgressPercent()) / 100}
+                cx="55" cy="55" r="50" 
+                fill="none" stroke="var(--accent-primary)" strokeWidth="6"
+                strokeDasharray="314"
+                strokeDashoffset={314 - (314 * getProgressPercent()) / 100}
                 style={{ transition: 'stroke-dashoffset 1s linear' }}
                 strokeLinecap="round"
               />
             </svg>
             
-            <div style={{ fontSize: '3rem', fontWeight: 300, color: 'white', zIndex: 1, fontFamily: 'monospace' }}>
+            <div style={{ fontSize: '1.8rem', fontWeight: 300, color: 'white', zIndex: 1, fontFamily: 'monospace' }}>
               {formatTime(timeRemaining)}
             </div>
           </div>
 
           <button 
             onClick={toggleTimer}
-            className={isActive ? 'btn-secondary' : ''}
+            className={isActive ? 'btn-secondary' : 'btn-primary'}
             style={{ 
-              marginTop: '3rem', 
-              width: '80px', height: '80px', borderRadius: '50%',
+              width: '64px', height: '64px', borderRadius: '50%',
               display: 'flex', justifyContent: 'center', alignItems: 'center',
-              padding: 0
+              padding: 0, boxShadow: isActive ? 'none' : '0 4px 14px 0 var(--accent-glow)'
             }}
           >
-            {isActive ? <Pause size={32} /> : <Play size={32} style={{ marginLeft: '4px' }} />}
-          </button>
-          
-          <button 
-             onClick={() => { setIsFinished(true); setTimeRemaining(0); setIsActive(false); }}
-             className="btn-secondary"
-             style={{ marginTop: '1.5rem', background: 'transparent', border: 'none', opacity: 0.7, textDecoration: 'underline' }}
-          >
-            Saltar sesión (Pruebas)
+            {isActive ? <Pause size={28} /> : <Play size={28} style={{ marginLeft: '4px' }} />}
           </button>
         </div>
+
+        <button 
+           onClick={() => { setIsFinished(true); setTimeRemaining(0); setIsActive(false); }}
+           className="btn-secondary"
+           style={{ margin: '0.5rem auto 0', background: 'transparent', border: 'none', opacity: 0.6, fontSize: '0.8rem', textDecoration: 'underline' }}
+        >
+          Saltar sesión (Pruebas)
+        </button>
 
       </div>
     </motion.div>
