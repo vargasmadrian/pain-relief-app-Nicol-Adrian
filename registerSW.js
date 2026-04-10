@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/pain-relief-app-Nicol-Adrian/sw.js', { scope: '/pain-relief-app-Nicol-Adrian/' })})}
