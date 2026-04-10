@@ -7,9 +7,9 @@ import { Activity, ArrowRight } from 'lucide-react';
 const BODY_PARTS = [
   { id: 'lumbar', name: 'Lumbar' },
   { id: 'cervical', name: 'Cervical' },
-  { id: 'hombro', name: 'Hombro / Manguito' },
+  { id: 'hombro', name: 'Hombro' },
   { id: 'cadera', name: 'Cadera' },
-  { id: 'tunel', name: 'Túnel Carpiano' }
+  { id: 'tunel', name: 'Muñeca' }
 ];
 
 export default function Onboarding() {
