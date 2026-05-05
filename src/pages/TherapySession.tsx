@@ -157,7 +157,7 @@ export default function TherapySession() {
   }
 
   const numericLevel = parseInt(level || '1');
-  const sessionExercise = getTherapyExercise(area, numericLevel);
+  const sessionExercise = getTherapyExercise(area, numericLevel, painLevel);
 
   return (
     <motion.div 
@@ -184,10 +184,12 @@ export default function TherapySession() {
 
         {/* --- AVATAR INTERACTIVO --- */}
         <div className="avatar-container" style={{ margin: '0 auto 0.5rem', height: '220px', width: '100%' }}>
-          <InteractiveAvatar 
-            selectedZone={area} 
+          <InteractiveAvatar
+            selectedZone={area}
             level={numericLevel}
+            painLevel={painLevel}
             isTherapyMode={true}
+            isPlaying={isActive}
           />
         </div>
 
