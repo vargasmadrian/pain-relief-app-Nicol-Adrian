@@ -83,13 +83,23 @@ const PUSH_WALL: Pose = {
   elbowRight:    '0% { transform: rotate(90deg) } 50% { transform: rotate(15deg) } 100% { transform: rotate(90deg) }',
 };
 
-// Plank-soft (forward lean with arms supporting)
-const PLANK_SOFT: Pose = {
-  spine:         '0%, 100% { transform: rotate(0deg) translateY(0) } 50% { transform: rotate(8deg) translateY(4px) }',
-  shoulderLeft:  '0%, 100% { transform: rotate(40deg) } 50% { transform: rotate(80deg) }',
-  shoulderRight: '0%, 100% { transform: rotate(-40deg) } 50% { transform: rotate(-80deg) }',
-  elbowLeft:     '0%, 100% { transform: rotate(-30deg) } 50% { transform: rotate(-10deg) }',
-  elbowRight:    '0%, 100% { transform: rotate(30deg) } 50% { transform: rotate(10deg) }',
+// Arm support / press out — arms extend forward as if supporting weight
+const ARM_SUPPORT: Pose = {
+  body:          '0%, 100% { transform: translateY(0) } 50% { transform: translateY(8px) }',
+  spine:         '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(10deg) }',
+  shoulderLeft:  '0%, 100% { transform: rotate(60deg) } 50% { transform: rotate(85deg) }',
+  shoulderRight: '0%, 100% { transform: rotate(-60deg) } 50% { transform: rotate(-85deg) }',
+  elbowLeft:     '0%, 100% { transform: rotate(-50deg) } 50% { transform: rotate(-10deg) }',
+  elbowRight:    '0%, 100% { transform: rotate(50deg) } 50% { transform: rotate(10deg) }',
+};
+
+// Lunge (side view): front leg forward bent, back leg extended back
+const LUNGE: Pose = {
+  body:      '0%, 100% { transform: translateY(0) } 50% { transform: translateY(8px) }',
+  spine:     '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-5deg) }',
+  hipLeft:   '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(40deg) }',
+  kneeLeft:  '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-60deg) }',
+  hipRight:  '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-22deg) }',
 };
 
 // Lift box (front view, hombro): body lowers, arms reach down then up
@@ -127,11 +137,6 @@ const SQUAT_CHAIR: Pose = {
   hipRight:      '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(30deg) }',
   kneeRight:     '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-45deg) }',
   shoulderLeft:  '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-60deg) }',
-};
-
-// Forward lean (side view default — negative rotation = forward in side view)
-const FORWARD_LEAN: Pose = {
-  spine: '0%, 100% { transform: rotate(0deg) translateY(0) } 50% { transform: rotate(-12deg) translateY(4px) }',
 };
 
 // Trunk twist (gentle spine rotation, kept tight so head doesn't fly)
@@ -315,7 +320,7 @@ export const getTherapyExercise = (
       ],
       COMPUESTOS: [
         { instruction: 'Empuja la pared con ambas manos firme y seguro.',          duration: '3s', poses: PUSH_WALL, prop: 'wall' },
-        { instruction: 'Postura de plancha suave. Cargas tu propio peso sin temor.', duration: '4s', poses: PLANK_SOFT },
+        { instruction: 'Apóyate firme con ambos brazos al frente. Cargas tu propio peso sin temor.', duration: '4s', poses: ARM_SUPPORT },
         { instruction: 'Levanta cajas ligeras del piso al armario.',                 duration: '5s', poses: LIFT_BOX_FRONT, prop: 'box' },
       ],
     },
@@ -353,7 +358,7 @@ export const getTherapyExercise = (
       ALEDANAS: [
         { instruction: 'Mueve rodillas despacio. Tus piernas cargan tu cadera.',     duration: '4s', poses: LEG_ACTIVATE },
         { instruction: 'Activa tu espalda baja sin mover la cadera.',                duration: '4s', poses: PELVIC_TILT },
-        { instruction: 'Despierta los tobillos. Mejor soporte, menor carga.',        duration: '1.6s', poses: WALK },
+        { instruction: 'Camina suave en el lugar. Despiertas piernas y tobillos.',   duration: '1.6s', poses: WALK },
       ],
       ESPECIFICOS: [
         { id: 'flexion',   instruction: 'Lleva rodilla al pecho (imaginación). La cadera flexiona sin dolor.', duration: '4s', poses: KNEE_TO_CHEST },
@@ -363,7 +368,7 @@ export const getTherapyExercise = (
       ],
       COMPUESTOS: [
         { instruction: 'Sentadilla asistida tocando silla.',                         duration: '4s', poses: SQUAT_CHAIR, prop: 'chair' },
-        { instruction: 'Desplante estático relajado. El cuerpo asimila carga viva.', duration: '4s', poses: FORWARD_LEAN },
+        { instruction: 'Desplante estático: una pierna adelante flexionada, otra atrás. El cuerpo asimila carga viva.', duration: '4s', poses: LUNGE },
         { instruction: 'Caminata simulada rápida levantando cadera.',                duration: '1.1s', poses: HIGH_KNEE },
       ],
     },
@@ -375,9 +380,9 @@ export const getTherapyExercise = (
         { instruction: 'Inspira positividad, exhala la anticipación.',          duration: '7s', poses: HAND_BREATHE_RELEASE },
       ],
       ALEDANAS: [
-        { instruction: 'Mueve el codo despacio. El nervio mediano pasa por aquí.', duration: '4s', poses: HAND_FLAP },
-        { instruction: 'Abre y cierra el hombro.',                                 duration: '5s', poses: HAND_SWAY },
-        { instruction: 'Extiende todo tu brazo recto.',                            duration: '4s', poses: HAND_EXTEND },
+        { instruction: 'Mueve la muñeca de un lado al otro. Estás liberando el nervio mediano que sube por el codo.', duration: '4s', poses: HAND_FLAP },
+        { instruction: 'Mece la muñeca al frente y al lado. El movimiento sube hasta hombro y codo.', duration: '5s', poses: HAND_SWAY },
+        { instruction: 'Estira la muñeca hacia adelante como si extendieras todo el brazo.', duration: '4s', poses: HAND_EXTEND },
       ],
       ESPECIFICOS: [
         { id: 'flexion',   instruction: 'Dobla muñeca abajo como un cisne.',                                  duration: '4s', poses: HAND_FLEX_DOWN },
