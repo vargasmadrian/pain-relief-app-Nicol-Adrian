@@ -233,22 +233,26 @@ export const getTherapyExercise = (
         { instruction: 'Saca pecho y junta los omóplatos. Mejora tu base.', ...CHEST_PUFF },
       ],
       ESPECIFICOS: [
+        // Flexion (forward lift): arms go up-and-out diagonally → Y-pose
         { id: 'flexion',   instruction: 'Levanta el brazo al frente cómodamente.',
           duration: '4s', target: 'arms',
-          keyframesLeft:  '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(60deg) }',
-          keyframesRight: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-60deg) }' },
+          keyframesLeft:  '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(135deg) }',
+          keyframesRight: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-135deg) }' },
+        // Abduction (out to sides): arms horizontal → T-pose
         { id: 'abduccion', instruction: 'Levanta el brazo a los lados. Estás ganando movilidad.',
           duration: '4s', target: 'arms',
-          keyframesLeft:  '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-50deg) }',
-          keyframesRight: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(50deg) }' },
+          keyframesLeft:  '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(90deg) }',
+          keyframesRight: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-90deg) }' },
+        // Cross body (hand to opposite shoulder): arms cross at chest
         { id: 'rotacion',  instruction: 'Lleva la mano al hombro contrario y vuelve. Tu hombro es fuerte.',
           duration: '4s', target: 'arms',
-          keyframesLeft:  '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(40deg) }',
-          keyframesRight: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-40deg) }' },
+          keyframesLeft:  '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-95deg) }',
+          keyframesRight: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(95deg) }' },
+        // Wings: fast wide flap, beyond T-pose
         { id: 'extra',     instruction: 'Levanta ambos brazos como alas grandes. Fluye.',
-          duration: '3s', target: 'arms',
-          keyframesLeft:  '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-90deg) }',
-          keyframesRight: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(90deg) }' },
+          duration: '1.6s', target: 'arms',
+          keyframesLeft:  '0%, 100% { transform: rotate(15deg) } 50% { transform: rotate(110deg) }',
+          keyframesRight: '0%, 100% { transform: rotate(-15deg) } 50% { transform: rotate(-110deg) }' },
       ],
       COMPUESTOS: [
         { instruction: 'Empuja la pared con ambas manos firme y seguro.', ...PUSH_FORWARD },
@@ -277,10 +281,10 @@ export const getTherapyExercise = (
           keyframesLeft: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(20deg) }' },
         { id: 'lateral',   instruction: 'Inclinación a un lado. Abre tus costillas con confianza.',
           duration: '4s', target: 'torso',
-          keyframesLeft: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(20deg) }' },
+          keyframesLeft: '0%, 50%, 100% { transform: rotate(0deg) translateX(0) } 25% { transform: rotate(-9deg) translateX(-7px) } 75% { transform: rotate(9deg) translateX(7px) }' },
         { id: 'rotacion',  instruction: 'Giro de torso. Los rotadores espinales disfrutan este estirón.',
           duration: '5s', target: 'torso',
-          keyframesLeft: '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(-15deg) } 75% { transform: rotate(15deg) }' },
+          keyframesLeft: '0%, 50%, 100% { transform: scaleX(1) } 25% { transform: scaleX(0.85) } 75% { transform: scaleX(1.1) }' },
       ],
       COMPUESTOS: [
         { instruction: 'Sentadilla fluida. Tus rodillas y espalda trabajan en equipo perfecto.', ...SQUAT },
@@ -312,7 +316,7 @@ export const getTherapyExercise = (
           keyframesLeft: '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(-12deg) } 75% { transform: rotate(12deg) }' },
         { id: 'extra',     instruction: 'Abre ambas piernas sutilmente. Eres móvil.',
           duration: '4s', target: 'torso',
-          keyframesLeft: '0%, 100% { transform: rotate(0deg) translateY(0) } 50% { transform: rotate(0deg) translateY(6px) }' },
+          keyframesLeft: '0%, 100% { transform: scaleX(1) translateY(0) } 50% { transform: scaleX(1.1) translateY(4px) }' },
       ],
       COMPUESTOS: [
         { instruction: 'Sentadilla asistida tocando silla.', ...SQUAT },
