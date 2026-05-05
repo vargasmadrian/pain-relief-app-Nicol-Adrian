@@ -26,11 +26,21 @@ interface ExerciseEntry {
 // so different instructions produce visibly different movements.
 // =====================================================================
 
-// Breathing — torso scales (no rotation, so head doesn't swing)
-const BREATHE: Pick<ExerciseEntry, 'duration' | 'target' | 'keyframesLeft'> = {
+// Breathing — three distinct patterns so each respiration level looks different
+const BREATHE_CHEST: Pick<ExerciseEntry, 'duration' | 'target' | 'keyframesLeft'> = {
+  duration: '5s',
+  target: 'torso',
+  keyframesLeft: '0%, 100% { transform: scale(1) translateY(0) } 50% { transform: scaleX(1.09) scaleY(1.03) translateY(-3px) }',
+};
+const BREATHE_BELLY: Pick<ExerciseEntry, 'duration' | 'target' | 'keyframesLeft'> = {
   duration: '6s',
   target: 'torso',
-  keyframesLeft: '0%, 100% { transform: scale(1) translateY(0) } 50% { transform: scale(1.06) translateY(-5px) }',
+  keyframesLeft: '0%, 100% { transform: scale(1) translateY(0) } 50% { transform: scaleY(1.08) translateY(-7px) }',
+};
+const BREATHE_RELEASE: Pick<ExerciseEntry, 'duration' | 'target' | 'keyframesLeft'> = {
+  duration: '7s',
+  target: 'torso',
+  keyframesLeft: '0% { transform: scale(1.06) translateY(-5px) } 35% { transform: scale(1) translateY(0) } 100% { transform: scale(1.06) translateY(-5px) }',
 };
 
 // Chest puff (sacar pecho) — wider, slight back lift, no body rotation
@@ -127,18 +137,33 @@ const PUSH_FORWARD: Pick<ExerciseEntry, 'duration' | 'target' | 'keyframesLeft' 
   keyframesRight: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-70deg) }',
 };
 
-// Neck side-tilt
-const NECK_TILT: Pick<ExerciseEntry, 'duration' | 'target' | 'keyframesLeft'> = {
-  duration: '5s',
+// Neck side-tilt — single side variants so left and right look distinct
+const NECK_TILT_LEFT: Pick<ExerciseEntry, 'duration' | 'target' | 'keyframesLeft'> = {
+  duration: '4s',
   target: 'head',
-  keyframesLeft: '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(-15deg) } 75% { transform: rotate(15deg) }',
+  keyframesLeft: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-18deg) }',
+};
+const NECK_TILT_RIGHT: Pick<ExerciseEntry, 'duration' | 'target' | 'keyframesLeft'> = {
+  duration: '4s',
+  target: 'head',
+  keyframesLeft: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(18deg) }',
 };
 
-// Hand presets (tunel)
-const HAND_BREATHE: Pick<ExerciseEntry, 'duration' | 'target' | 'keyframesLeft'> = {
+// Hand respiration — three distinct breathing patterns
+const HAND_BREATHE_PULSE: Pick<ExerciseEntry, 'duration' | 'target' | 'keyframesLeft'> = {
+  duration: '5s',
+  target: 'hand',
+  keyframesLeft: '0%, 100% { transform: scale(1) } 50% { transform: scale(1.09) }',
+};
+const HAND_BREATHE_DRIFT: Pick<ExerciseEntry, 'duration' | 'target' | 'keyframesLeft'> = {
   duration: '6s',
   target: 'hand',
-  keyframesLeft: '0%, 100% { transform: scale(1) } 50% { transform: scale(1.08) }',
+  keyframesLeft: '0%, 100% { transform: scale(1) translateX(0) } 50% { transform: scale(1.05) translateX(-5px) }',
+};
+const HAND_BREATHE_RELEASE: Pick<ExerciseEntry, 'duration' | 'target' | 'keyframesLeft'> = {
+  duration: '7s',
+  target: 'hand',
+  keyframesLeft: '0% { transform: scale(1.08) } 35% { transform: scale(1) } 100% { transform: scale(1.08) }',
 };
 const HAND_FLAP: Pick<ExerciseEntry, 'duration' | 'target' | 'keyframesLeft'> = {
   duration: '4s',
@@ -161,9 +186,9 @@ export const getTherapyExercise = (
   const REGION_DB: Record<string, Record<string, ExerciseEntry[]>> = {
     cervical: {
       RESPIRACION: [
-        { instruction: 'Respira profundo e infla el abdomen. Relaja los hombros.', ...BREATHE },
-        { instruction: 'Suelta el aire lentamente. Siente cómo baja la tensión.', ...BREATHE },
-        { instruction: 'Otra respiración profunda. Estás a salvo, tu cuello está bien.', ...BREATHE },
+        { instruction: 'Respira profundo e infla el abdomen. Relaja los hombros.', ...BREATHE_BELLY },
+        { instruction: 'Suelta el aire lentamente. Siente cómo baja la tensión.', ...BREATHE_RELEASE },
+        { instruction: 'Otra respiración profunda. Estás a salvo, tu cuello está bien.', ...BREATHE_CHEST },
       ],
       ALEDANAS: [
         { instruction: 'Mueve suavemente los hombros. Ayuda a liberar tu cuello.', ...SHOULDER_ROLL },
@@ -189,19 +214,22 @@ export const getTherapyExercise = (
           duration: '5s', target: 'head',
           keyframesLeft: '0%, 25%, 50%, 75%, 100% { transform: rotate(0deg) } 12% { transform: rotate(-25deg) } 37% { transform: rotate(15deg) } 62% { transform: rotate(25deg) } 87% { transform: rotate(-15deg) }' },
         { instruction: 'Simula alcanzar un objeto arriba de ti.', ...ARMS_OVERHEAD },
-        { instruction: 'Giros amplios de cuerpo completo.', ...TRUNK_TWIST },
+        { instruction: 'Giros amplios de cuerpo completo.',
+          duration: '5s', target: 'arms',
+          keyframesLeft:  '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(60deg) } 75% { transform: rotate(-60deg) }',
+          keyframesRight: '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(-60deg) } 75% { transform: rotate(60deg) }' },
       ],
     },
 
     hombro: {
       RESPIRACION: [
-        { instruction: 'Inhala profundamente hacia tu caja torácica.', ...BREATHE },
-        { instruction: 'Exhala soltando el peso de los brazos.', ...BREATHE },
-        { instruction: 'Relaja la mandíbula al respirar. Esto calma el hombro.', ...BREATHE },
+        { instruction: 'Inhala profundamente hacia tu caja torácica.', ...BREATHE_CHEST },
+        { instruction: 'Exhala soltando el peso de los brazos.', ...BREATHE_RELEASE },
+        { instruction: 'Relaja la mandíbula al respirar. Esto calma el hombro.', ...BREATHE_BELLY },
       ],
       ALEDANAS: [
-        { instruction: 'Mueve solo el cuello a un lado. El nervio de tu brazo nace aquí.', ...NECK_TILT },
-        { instruction: 'Mueve el otro lado del cuello suavemente.', ...NECK_TILT },
+        { instruction: 'Mueve el cuello hacia la izquierda. El nervio de tu brazo nace aquí.', ...NECK_TILT_LEFT },
+        { instruction: 'Ahora hacia la derecha, suavemente.', ...NECK_TILT_RIGHT },
         { instruction: 'Saca pecho y junta los omóplatos. Mejora tu base.', ...CHEST_PUFF },
       ],
       ESPECIFICOS: [
@@ -231,9 +259,9 @@ export const getTherapyExercise = (
 
     lumbar: {
       RESPIRACION: [
-        { instruction: 'Respira hacia tu panza. Relaja completamente todo el abdomen.', ...BREATHE },
-        { instruction: 'Al soltar el aire, deja ir toda preocupación lumbar.', ...BREATHE },
-        { instruction: 'Inhala sintiendo cómo se expande tu zona baja. Estás limpio de daños.', ...BREATHE },
+        { instruction: 'Respira hacia tu panza. Relaja completamente todo el abdomen.', ...BREATHE_BELLY },
+        { instruction: 'Al soltar el aire, deja ir toda preocupación lumbar.', ...BREATHE_RELEASE },
+        { instruction: 'Inhala sintiendo cómo se expande tu zona baja. Estás limpio de daños.', ...BREATHE_CHEST },
       ],
       ALEDANAS: [
         { instruction: 'Aprieta y suelta glúteos. Protegen tu espalda.', ...GLUTE_SQUEEZE },
@@ -263,9 +291,9 @@ export const getTherapyExercise = (
 
     cadera: {
       RESPIRACION: [
-        { instruction: 'Respiración pélvica profunda.', ...BREATHE },
-        { instruction: 'Al exhalar, suelta tu pelvis por completo.', ...BREATHE },
-        { instruction: 'Lleva aire oxigenado hacia las venas de tus ingles.', ...BREATHE },
+        { instruction: 'Respiración pélvica profunda.', ...BREATHE_BELLY },
+        { instruction: 'Al exhalar, suelta tu pelvis por completo.', ...BREATHE_RELEASE },
+        { instruction: 'Lleva aire oxigenado hacia las venas de tus ingles.', ...BREATHE_CHEST },
       ],
       ALEDANAS: [
         { instruction: 'Mueve rodillas despacio. Tus piernas cargan tu cadera.', ...LEG_ACTIVATE },
@@ -289,15 +317,17 @@ export const getTherapyExercise = (
       COMPUESTOS: [
         { instruction: 'Sentadilla asistida tocando silla.', ...SQUAT },
         { instruction: 'Desplante estático relajado. El cuerpo asimila carga viva.', ...FORWARD_LEAN },
-        { instruction: 'Caminata simulada rápida levantando cadera.', ...WALK },
+        { instruction: 'Caminata simulada rápida levantando cadera.',
+          duration: '1.1s', target: 'torso',
+          keyframesLeft: '0%, 50%, 100% { transform: rotate(0deg) translateY(0) } 25% { transform: rotate(-4deg) translateY(-9px) } 75% { transform: rotate(4deg) translateY(-9px) }' },
       ],
     },
 
     tunel: {
       RESPIRACION: [
-        { instruction: 'Respira para calmar las corrientes nerviosas.', ...HAND_BREATHE },
-        { instruction: 'Relaja cuello y hombro. Todo baja hasta los dedos.', ...HAND_BREATHE },
-        { instruction: 'Inspira positividad, exhala la anticipación.', ...HAND_BREATHE },
+        { instruction: 'Respira para calmar las corrientes nerviosas.', ...HAND_BREATHE_PULSE },
+        { instruction: 'Relaja cuello y hombro. Todo baja hasta los dedos.', ...HAND_BREATHE_DRIFT },
+        { instruction: 'Inspira positividad, exhala la anticipación.', ...HAND_BREATHE_RELEASE },
       ],
       ALEDANAS: [
         { instruction: 'Mueve el codo despacio. El nervio mediano pasa por aquí.', ...HAND_FLAP },
