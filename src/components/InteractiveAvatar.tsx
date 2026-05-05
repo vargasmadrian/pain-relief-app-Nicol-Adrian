@@ -1,5 +1,5 @@
 import { getTherapyExercise } from '../data/therapyExercises';
-import type { AnimationTarget } from '../data/therapyExercises';
+import type { AnimationTarget, ExerciseProp } from '../data/therapyExercises';
 
 // ==========================================
 // CSS PURO PARA SVG (RENDERIZADO DINÁMICO)
@@ -35,6 +35,47 @@ const shoes = "#f8fafc";
 const hair = "#4a2e1e";
 const hairShade = "#3d2817";
 const eyeColor = "#1e293b";
+const propFill = "#475569";
+const propStroke = "#94a3b8";
+
+// ==========================
+// PROPS (objects the avatar interacts with)
+// ==========================
+const FrontProps = ({ prop }: { prop?: ExerciseProp }) => {
+  if (prop === 'wall') {
+    return (
+      <g>
+        <rect x="-32" y="90" width="14" height="170" rx="2" fill={propFill} stroke={propStroke} strokeWidth="1.5" />
+        <line x1="-32" y1="125" x2="-18" y2="125" stroke={propStroke} strokeWidth="0.8" />
+        <line x1="-32" y1="160" x2="-18" y2="160" stroke={propStroke} strokeWidth="0.8" />
+        <line x1="-32" y1="195" x2="-18" y2="195" stroke={propStroke} strokeWidth="0.8" />
+        <line x1="-32" y1="230" x2="-18" y2="230" stroke={propStroke} strokeWidth="0.8" />
+
+        <rect x="218" y="90" width="14" height="170" rx="2" fill={propFill} stroke={propStroke} strokeWidth="1.5" />
+        <line x1="218" y1="125" x2="232" y2="125" stroke={propStroke} strokeWidth="0.8" />
+        <line x1="218" y1="160" x2="232" y2="160" stroke={propStroke} strokeWidth="0.8" />
+        <line x1="218" y1="195" x2="232" y2="195" stroke={propStroke} strokeWidth="0.8" />
+        <line x1="218" y1="230" x2="232" y2="230" stroke={propStroke} strokeWidth="0.8" />
+      </g>
+    );
+  }
+  return null;
+};
+
+const HandProps = ({ prop }: { prop?: ExerciseProp }) => {
+  if (prop === 'wall') {
+    return (
+      <g>
+        <rect x="170" y="100" width="14" height="170" rx="2" fill={propFill} stroke={propStroke} strokeWidth="1.5" />
+        <line x1="170" y1="135" x2="184" y2="135" stroke={propStroke} strokeWidth="0.8" />
+        <line x1="170" y1="170" x2="184" y2="170" stroke={propStroke} strokeWidth="0.8" />
+        <line x1="170" y1="205" x2="184" y2="205" stroke={propStroke} strokeWidth="0.8" />
+        <line x1="170" y1="240" x2="184" y2="240" stroke={propStroke} strokeWidth="0.8" />
+      </g>
+    );
+  }
+  return null;
+};
 
 // ==========================
 // CABEZA FRONTAL (más natural)
@@ -124,7 +165,7 @@ const classFor = (
 // ==========================
 // FRONT AVATAR (Vista Frontal)
 // ==========================
-const FrontAvatar = ({ inTherapy, isAnimating, target }: { inTherapy: boolean, isAnimating: boolean, target: AnimationTarget }) => {
+const FrontAvatar = ({ inTherapy, isAnimating, target, prop }: { inTherapy: boolean, isAnimating: boolean, target: AnimationTarget, prop?: ExerciseProp }) => {
   const headClass     = classFor('head',  inTherapy, isAnimating, target);
   const torsoClass    = classFor('torso', inTherapy, isAnimating, target);
   const leftArmClass  = classFor('arms',  inTherapy, isAnimating, target, 'left');
@@ -136,6 +177,7 @@ const FrontAvatar = ({ inTherapy, isAnimating, target }: { inTherapy: boolean, i
       preserveAspectRatio="xMidYMid meet"
       style={{ width: '100%', height: '100%', display: 'block' }}
     >
+      {inTherapy && <FrontProps prop={prop} />}
       <g id="legs">
         <line x1="85" y1="240" x2="85" y2="310" stroke={pants} strokeWidth="20" strokeLinecap="round" />
         <rect x="70" y="305" width="25" height="15" rx="5" fill={shoes} />
@@ -212,7 +254,7 @@ const SideAvatar = ({ inTherapy, isAnimating }: { inTherapy: boolean, isAnimatin
 // ==========================
 // HAND AVATAR (Túnel Carpiano)
 // ==========================
-const HandAvatar = ({ inTherapy, isAnimating }: { inTherapy: boolean, isAnimating: boolean }) => {
+const HandAvatar = ({ inTherapy, isAnimating, prop }: { inTherapy: boolean, isAnimating: boolean, prop?: ExerciseProp }) => {
   const handClass = !inTherapy
     ? 'idle-rot-fast'
     : (isAnimating ? 'active-therapy-left' : '');
@@ -223,6 +265,7 @@ const HandAvatar = ({ inTherapy, isAnimating }: { inTherapy: boolean, isAnimatin
       preserveAspectRatio="xMidYMid meet"
       style={{ width: '100%', height: '100%', display: 'block' }}
     >
+      {inTherapy && <HandProps prop={prop} />}
       <line x1="-30" y1="180" x2="40" y2="180" stroke={tshirt} strokeWidth="55" strokeLinecap="round" />
       <line x1="20" y1="180" x2="100" y2="180" stroke={skin} strokeWidth="40" strokeLinecap="round" />
 
@@ -268,6 +311,7 @@ export default function InteractiveAvatar({
   const inTherapy = isTherapyMode && currentVariant !== 'idle';
   const isAnimating = inTherapy && isPlaying;
   const target = exercise.animationProps.target;
+  const prop = exercise.animationProps.prop;
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -277,11 +321,11 @@ export default function InteractiveAvatar({
         duration={exercise.animationProps.duration}
       />
       {isHandView ? (
-        <HandAvatar inTherapy={inTherapy} isAnimating={isAnimating} />
+        <HandAvatar inTherapy={inTherapy} isAnimating={isAnimating} prop={prop} />
       ) : isSideView ? (
         <SideAvatar inTherapy={inTherapy} isAnimating={isAnimating} />
       ) : (
-        <FrontAvatar inTherapy={inTherapy} isAnimating={isAnimating} target={target} />
+        <FrontAvatar inTherapy={inTherapy} isAnimating={isAnimating} target={target} prop={prop} />
       )}
     </div>
   );

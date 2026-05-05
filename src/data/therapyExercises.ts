@@ -1,4 +1,5 @@
 export type AnimationTarget = 'head' | 'arms' | 'torso' | 'hand';
+export type ExerciseProp = 'wall' | 'box' | 'ceiling' | 'chair' | 'weight';
 
 export interface TherapyExercise {
   region: string;
@@ -9,6 +10,7 @@ export interface TherapyExercise {
     keyframesLeft: string;
     keyframesRight?: string;
     target: AnimationTarget;
+    prop?: ExerciseProp;
   };
 }
 
@@ -19,6 +21,7 @@ interface ExerciseEntry {
   target: AnimationTarget;
   keyframesLeft: string;
   keyframesRight?: string;
+  prop?: ExerciseProp;
 }
 
 // =====================================================================
@@ -129,12 +132,13 @@ const ARMS_OVERHEAD: Pick<ExerciseEntry, 'duration' | 'target' | 'keyframesLeft'
   keyframesRight: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(90deg) }',
 };
 
-// Push forward (wall push) — both arms extend in front
-const PUSH_FORWARD: Pick<ExerciseEntry, 'duration' | 'target' | 'keyframesLeft' | 'keyframesRight'> = {
+// Push forward (wall push) — arms extend out to T-pose toward side walls
+const PUSH_FORWARD: Pick<ExerciseEntry, 'duration' | 'target' | 'keyframesLeft' | 'keyframesRight' | 'prop'> = {
   duration: '4s',
   target: 'arms',
-  keyframesLeft:  '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(70deg) }',
-  keyframesRight: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-70deg) }',
+  keyframesLeft:  '0% { transform: rotate(60deg) } 50% { transform: rotate(90deg) } 100% { transform: rotate(60deg) }',
+  keyframesRight: '0% { transform: rotate(-60deg) } 50% { transform: rotate(-90deg) } 100% { transform: rotate(-60deg) }',
+  prop: 'wall',
 };
 
 // Neck side-tilt — single side variants so left and right look distinct
@@ -359,7 +363,7 @@ export const getTherapyExercise = (
           duration: '4s', target: 'hand',
           keyframesLeft: '0%, 100% { transform: rotate(0deg) translateY(0) } 50% { transform: rotate(15deg) translateY(-8px) }' },
         { instruction: 'Empuja la pared con ambas manos, usando toda la cadena.',
-          duration: '4s', target: 'hand',
+          duration: '4s', target: 'hand', prop: 'wall',
           keyframesLeft: '0%, 100% { transform: translateX(0) } 50% { transform: translateX(12px) }' },
         { instruction: 'Estiramiento integral de todo el brazo rotando el torso.',
           duration: '5s', target: 'hand',
@@ -407,6 +411,7 @@ export const getTherapyExercise = (
       keyframesLeft: selectedEx.keyframesLeft,
       keyframesRight: selectedEx.keyframesRight,
       target: selectedEx.target,
+      prop: selectedEx.prop,
     },
   };
 };
