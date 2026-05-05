@@ -30,35 +30,35 @@ export const getTherapyExercise = (
 
   // Chest expand for breathing — applied to torso group
   const BREATHE = {
-    duration: '7s',
-    keyframesLeft: '0%, 100% { transform: scale(1) translateY(0) } 50% { transform: scale(1.04) translateY(-3px) }',
+    duration: '6s',
+    keyframesLeft: '0%, 100% { transform: scale(1) translateY(0) } 50% { transform: scale(1.07) translateY(-6px) }',
     target: 'torso' as AnimationTarget,
   };
 
-  // Mild adjacent sway, applied to torso (chest/back)
+  // Adjacent torso sway (chest/back)
   const ADJ_TORSO = {
-    duration: '5s',
-    keyframesLeft: '0%, 100% { transform: rotate(-2deg) } 50% { transform: rotate(2deg) }',
+    duration: '4s',
+    keyframesLeft: '0%, 100% { transform: rotate(-6deg) } 50% { transform: rotate(6deg) }',
     target: 'torso' as AnimationTarget,
   };
-  // Mild adjacent sway, applied to head (neck wiggle adjacent to shoulder work)
+  // Adjacent head sway (neck wiggle adjacent to shoulder work)
   const ADJ_HEAD = {
-    duration: '5s',
-    keyframesLeft: '0%, 100% { transform: rotate(-4deg) } 50% { transform: rotate(4deg) }',
+    duration: '4s',
+    keyframesLeft: '0%, 100% { transform: rotate(-10deg) } 50% { transform: rotate(10deg) }',
     target: 'head' as AnimationTarget,
   };
-  // Adjacent symmetric arms (shoulder rolls, etc)
+  // Adjacent symmetric arms (shoulder rolls)
   const ADJ_ARMS = {
-    duration: '5s',
-    keyframesLeft:  '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-12deg) }',
-    keyframesRight: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(12deg) }',
+    duration: '4s',
+    keyframesLeft:  '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-25deg) }',
+    keyframesRight: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(25deg) }',
     target: 'arms' as AnimationTarget,
   };
 
-  // Compound — gentle whole-torso engagement
+  // Compound — visible whole-torso engagement
   const COMPOUND = {
     duration: '4s',
-    keyframesLeft: '0%, 100% { transform: rotate(-3deg) translateY(0) } 50% { transform: rotate(8deg) translateY(5px) }',
+    keyframesLeft: '0%, 100% { transform: rotate(-5deg) translateY(0) } 50% { transform: rotate(15deg) translateY(8px) }',
     target: 'torso' as AnimationTarget,
   };
 
@@ -80,9 +80,9 @@ export const getTherapyExercise = (
         { id: 'extension', instruction: 'Mira hacia arriba suavemente. Confía en el movimiento.', duration: '5s', target: 'head',
           keyframesLeft: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-20deg) }' },
         { id: 'lateral',   instruction: 'Oreja al hombro. Siente el alivio en los lados.', duration: '6s', target: 'head',
-          keyframesLeft: '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(-15deg) } 75% { transform: rotate(15deg) }' },
+          keyframesLeft: '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(-22deg) } 75% { transform: rotate(22deg) }' },
         { id: 'rotacion',  instruction: 'Mira por encima de tu hombro. Moverse es seguro.', duration: '6s', target: 'head',
-          keyframesLeft: '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(-25deg) } 75% { transform: rotate(25deg) }' },
+          keyframesLeft: '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(-30deg) } 75% { transform: rotate(30deg) }' },
       ],
       COMPUESTOS: [
         { instruction: 'Mira hacia todas las direcciones mientras caminas.', ...COMPOUND },
@@ -136,17 +136,17 @@ export const getTherapyExercise = (
         { id: 'flexion',   instruction: 'Agáchate un poco al piso. Tus discos son una maravilla natural resistente.', duration: '5s', target: 'torso',
           keyframesLeft: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-30deg) }' },
         { id: 'extension', instruction: 'Estírate hacia atrás suavemente. La espalda soporta curvas.', duration: '5s', target: 'torso',
-          keyframesLeft: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(15deg) }' },
+          keyframesLeft: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(22deg) }' },
         { id: 'lateral',   instruction: 'Inclinación a un lado. Abre tus costillas con confianza.', duration: '5s', target: 'torso',
-          keyframesLeft: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(15deg) }' },
+          keyframesLeft: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(22deg) }' },
         { id: 'rotacion',  instruction: 'Giro de torso. Los rotadores espinales disfrutan este estirón.', duration: '6s', target: 'torso',
-          keyframesLeft: '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(-12deg) } 75% { transform: rotate(12deg) }' },
+          keyframesLeft: '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(-18deg) } 75% { transform: rotate(18deg) }' },
       ],
       COMPUESTOS: [
         { instruction: 'Sentadilla fluida. Tus rodillas y espalda trabajan en equipo perfecto.', ...COMPOUND },
         { instruction: 'Peso muerto ligero. Crees poder cargar cajas porque ¡así es!',
           duration: '5s', target: 'torso',
-          keyframesLeft: '0%, 100% { transform: rotate(0deg) translateY(0) } 50% { transform: rotate(-22deg) translateY(4px) }' },
+          keyframesLeft: '0%, 100% { transform: rotate(0deg) translateY(0) } 50% { transform: rotate(-30deg) translateY(8px) }' },
         { instruction: 'Estirada global de cuerpo buscando el cielo.', ...COMPOUND },
       ],
     },
@@ -163,13 +163,13 @@ export const getTherapyExercise = (
       ],
       ESPECIFICOS: [
         { id: 'flexion',   instruction: 'Lleva rodilla al pecho (imaginación). La cadera flexiona sin dolor.', duration: '5s', target: 'torso',
-          keyframesLeft: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-22deg) }' },
+          keyframesLeft: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-28deg) }' },
         { id: 'extension', instruction: 'Pierna atrás. Tus glúteos despiertan y ayudan al fémur.', duration: '5s', target: 'torso',
-          keyframesLeft: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(14deg) }' },
+          keyframesLeft: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(20deg) }' },
         { id: 'rotacion',  instruction: 'Rota la pierna hacia afuera tranquilamente.', duration: '6s', target: 'torso',
-          keyframesLeft: '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(-10deg) } 75% { transform: rotate(10deg) }' },
+          keyframesLeft: '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(-16deg) } 75% { transform: rotate(16deg) }' },
         { id: 'extra',     instruction: 'Abre ambas piernas sutilmente. Eres móvil.', duration: '5s', target: 'torso',
-          keyframesLeft: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-15deg) }' },
+          keyframesLeft: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-22deg) }' },
       ],
       COMPUESTOS: [
         { instruction: 'Sentadilla asistida tocando silla.', ...COMPOUND },
@@ -180,19 +180,19 @@ export const getTherapyExercise = (
     tunel: {
       RESPIRACION: [
         { instruction: 'Respira para calmar las corrientes nerviosas.', duration: '7s', target: 'hand',
-          keyframesLeft: '0%, 100% { transform: scale(1) } 50% { transform: scale(1.03) }' },
+          keyframesLeft: '0%, 100% { transform: scale(1) } 50% { transform: scale(1.08) }'},
         { instruction: 'Relaja cuello y hombro. Todo baja hasta los dedos.', duration: '7s', target: 'hand',
-          keyframesLeft: '0%, 100% { transform: scale(1) } 50% { transform: scale(1.03) }' },
+          keyframesLeft: '0%, 100% { transform: scale(1) } 50% { transform: scale(1.08) }'},
         { instruction: 'Inspira positividad, exhala la anticipación.', duration: '7s', target: 'hand',
-          keyframesLeft: '0%, 100% { transform: scale(1) } 50% { transform: scale(1.03) }' },
+          keyframesLeft: '0%, 100% { transform: scale(1) } 50% { transform: scale(1.08) }'},
       ],
       ALEDANAS: [
         { instruction: 'Mueve el codo despacio. El nervio mediano pasa por aquí.', duration: '5s', target: 'hand',
-          keyframesLeft: '0%, 100% { transform: rotate(-4deg) } 50% { transform: rotate(4deg) }' },
+          keyframesLeft: '0%, 100% { transform: rotate(-10deg) } 50% { transform: rotate(10deg) }'},
         { instruction: 'Abre y cierra el hombro.', duration: '5s', target: 'hand',
-          keyframesLeft: '0%, 100% { transform: rotate(-4deg) } 50% { transform: rotate(4deg) }' },
+          keyframesLeft: '0%, 100% { transform: rotate(-10deg) } 50% { transform: rotate(10deg) }'},
         { instruction: 'Extiende todo tu brazo recto.', duration: '5s', target: 'hand',
-          keyframesLeft: '0%, 100% { transform: rotate(-4deg) } 50% { transform: rotate(4deg) }' },
+          keyframesLeft: '0%, 100% { transform: rotate(-10deg) } 50% { transform: rotate(10deg) }'},
       ],
       ESPECIFICOS: [
         { id: 'flexion',   instruction: 'Dobla muñeca abajo como un cisne.', duration: '4s', target: 'hand',

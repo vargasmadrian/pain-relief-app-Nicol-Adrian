@@ -183,7 +183,7 @@ export default function TherapySession() {
         </div>
 
         {/* --- AVATAR INTERACTIVO --- */}
-        <div className="avatar-container" style={{ margin: '0 auto 0.5rem', height: '220px', width: '100%' }}>
+        <div className="avatar-container" style={{ margin: '0 auto 0.5rem', height: '240px', width: '100%', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <InteractiveAvatar
             selectedZone={area}
             level={numericLevel}

@@ -9,8 +9,8 @@ const DynamicStyles = ({ keyframesLeft, keyframesRight, duration }: { keyframesL
     <style>{`
       .idle-rot-fast { animation: rot-fast 4s infinite ease-in-out; }
       .idle-scale { animation: scale-bounce 4s infinite ease-in-out; }
-      @keyframes rot-fast { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
-      @keyframes scale-bounce { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.02); } }
+      @keyframes rot-fast { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+      @keyframes scale-bounce { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.04); } }
 
       .active-therapy-left { animation: therapy-anim-left ${duration} infinite ease-in-out; }
       @keyframes therapy-anim-left { ${keyframesLeft} }
@@ -131,7 +131,11 @@ const FrontAvatar = ({ inTherapy, isAnimating, target }: { inTherapy: boolean, i
   const rightArmClass = classFor('arms',  inTherapy, isAnimating, target, 'right');
 
   return (
-    <svg width="220" height="350" viewBox="0 0 200 350" style={{ zIndex: 1, overflow: 'visible' }}>
+    <svg
+      viewBox="-40 0 280 340"
+      preserveAspectRatio="xMidYMid meet"
+      style={{ width: '100%', height: '100%', display: 'block' }}
+    >
       <g id="legs">
         <line x1="85" y1="240" x2="85" y2="310" stroke={pants} strokeWidth="20" strokeLinecap="round" />
         <rect x="70" y="305" width="25" height="15" rx="5" fill={shoes} />
@@ -174,7 +178,11 @@ const SideAvatar = ({ inTherapy, isAnimating }: { inTherapy: boolean, isAnimatin
     : (isAnimating ? 'active-therapy-left' : '');
 
   return (
-    <svg width="220" height="350" viewBox="0 0 200 350" style={{ zIndex: 1, overflow: 'visible' }}>
+    <svg
+      viewBox="-40 0 280 340"
+      preserveAspectRatio="xMidYMid meet"
+      style={{ width: '100%', height: '100%', display: 'block' }}
+    >
       <g id="leg-back">
         <line x1="100" y1="240" x2="105" y2="310" stroke={pantsDark} strokeWidth="18" strokeLinecap="round" />
         <rect x="92" y="305" width="28" height="15" rx="5" fill={shoes} />
@@ -210,7 +218,11 @@ const HandAvatar = ({ inTherapy, isAnimating }: { inTherapy: boolean, isAnimatin
     : (isAnimating ? 'active-therapy-left' : '');
 
   return (
-    <svg width="220" height="350" viewBox="0 0 200 350" style={{ zIndex: 1, overflow: 'visible' }}>
+    <svg
+      viewBox="-50 80 290 200"
+      preserveAspectRatio="xMidYMid meet"
+      style={{ width: '100%', height: '100%', display: 'block' }}
+    >
       <line x1="-30" y1="180" x2="40" y2="180" stroke={tshirt} strokeWidth="55" strokeLinecap="round" />
       <line x1="20" y1="180" x2="100" y2="180" stroke={skin} strokeWidth="40" strokeLinecap="round" />
 
