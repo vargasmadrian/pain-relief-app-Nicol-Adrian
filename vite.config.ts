@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  base: '/pain-relief-app-Nicol-Adrian/',
+  base: '/pain-relief-app-Nicole-Adrian/',
   plugins: [
     react(),
     VitePWA({
