@@ -102,11 +102,14 @@ const LUNGE: Pose = {
   hipRight:  '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-22deg) }',
 };
 
-// Lift box (front view, hombro): body lowers, arms reach down then up
+// Lift box (front view, hombro): squat down with arms hanging, then stand and bring arms to chest
 const LIFT_BOX_FRONT: Pose = {
-  body:          '0% { transform: translateY(10px) } 50% { transform: translateY(0) } 100% { transform: translateY(10px) }',
-  shoulderLeft:  '0% { transform: rotate(-25deg) } 50% { transform: rotate(15deg) } 100% { transform: rotate(-25deg) }',
-  shoulderRight: '0% { transform: rotate(25deg) } 50% { transform: rotate(-15deg) } 100% { transform: rotate(25deg) }',
+  body:          '0% { transform: translateY(20px) } 50% { transform: translateY(0) } 100% { transform: translateY(20px) }',
+  spine:         '0% { transform: rotate(15deg) } 50% { transform: rotate(0deg) } 100% { transform: rotate(15deg) }',
+  shoulderLeft:  '0% { transform: rotate(0deg) } 50% { transform: rotate(15deg) } 100% { transform: rotate(0deg) }',
+  shoulderRight: '0% { transform: rotate(0deg) } 50% { transform: rotate(-15deg) } 100% { transform: rotate(0deg) }',
+  elbowLeft:     '0% { transform: rotate(0deg) } 50% { transform: rotate(-95deg) } 100% { transform: rotate(0deg) }',
+  elbowRight:    '0% { transform: rotate(0deg) } 50% { transform: rotate(95deg) } 100% { transform: rotate(0deg) }',
 };
 
 // Lift box / deadlift (side view, lumbar): hinge at hip, slight knee bend
@@ -144,14 +147,15 @@ const TRUNK_TWIST: Pose = {
   spine: '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(-7deg) } 75% { transform: rotate(7deg) }',
 };
 
-// Pelvic tilt
+// Pelvic tilt — visible anterior/posterior pelvic motion
 const PELVIC_TILT: Pose = {
-  spine: '0%, 100% { transform: rotate(0deg) translateY(0) } 50% { transform: rotate(-3deg) translateY(2px) }',
+  spine: '0%, 100% { transform: rotate(0deg) translateY(0) } 50% { transform: rotate(-7deg) translateY(3px) }',
 };
 
-// Glute squeeze
+// Glute squeeze — slight lift + tiny posterior pelvic tilt
 const GLUTE_SQUEEZE: Pose = {
-  body: '0%, 100% { transform: translateY(0) } 50% { transform: translateY(-3px) }',
+  body:  '0%, 100% { transform: translateY(0) } 50% { transform: translateY(-5px) }',
+  spine: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(3deg) }',
 };
 
 // Leg activation (alternate hip flex, side view: positive = forward swing)
@@ -195,10 +199,9 @@ const LEG_BACK: Pose = {
   hipLeft: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-30deg) }',
 };
 
-// External hip rotation (side view: oscillation)
-const HIP_EXT_ROT: Pose = {
-  hipLeft:  '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(15deg) } 75% { transform: rotate(-15deg) }',
-  kneeLeft: '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(-15deg) } 75% { transform: rotate(15deg) }',
+// Hip swing forward/back (side view): clear front leg motion
+const HIP_SWING: Pose = {
+  hipLeft:  '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(25deg) } 75% { transform: rotate(-20deg) }',
 };
 
 // Lumbar flexion (side view, forward bend = negative spine rotation)
@@ -212,8 +215,10 @@ const LUMBAR_EXT: Pose = {
 const LUMBAR_LATERAL: Pose = {
   spine: '0%, 50%, 100% { transform: rotate(0deg) translateX(0) } 25% { transform: rotate(-10deg) translateX(-7px) } 75% { transform: rotate(10deg) translateX(7px) }',
 };
+// Lumbar rotation — spine + arm swing for visible twist (instead of artificial scaleX)
 const LUMBAR_ROT: Pose = {
-  spine: '0%, 50%, 100% { transform: scaleX(1) rotate(0deg) } 25% { transform: scaleX(0.85) rotate(-3deg) } 75% { transform: scaleX(1.1) rotate(3deg) }',
+  spine:        '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(-8deg) } 75% { transform: rotate(8deg) }',
+  shoulderLeft: '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(25deg) } 75% { transform: rotate(-25deg) }',
 };
 
 // Cervical specifics (head only)
@@ -221,7 +226,9 @@ const HEAD_FLEX:    Pose = { head: '0%, 100% { transform: rotate(0deg) } 50% { t
 const HEAD_EXT:     Pose = { head: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-22deg) }' };
 const HEAD_LATERAL: Pose = { head: '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(-22deg) } 75% { transform: rotate(22deg) }' };
 const HEAD_ROT:     Pose = { head: '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(-30deg) } 75% { transform: rotate(30deg) }' };
+// Head looking around while body bobs (suggests walking)
 const HEAD_LOOK_AROUND: Pose = {
+  body: '0%, 50%, 100% { transform: translateY(0) } 25%, 75% { transform: translateY(-4px) }',
   head: '0%, 25%, 50%, 75%, 100% { transform: rotate(0deg) } 12% { transform: rotate(-25deg) } 37% { transform: rotate(15deg) } 62% { transform: rotate(25deg) } 87% { transform: rotate(-15deg) }',
 };
 
@@ -262,7 +269,7 @@ const HAND_BREATHE_DRIFT:   Pose = { hand: '0%, 100% { transform: scale(1) trans
 const HAND_BREATHE_RELEASE: Pose = { hand: '0% { transform: scale(1.08) } 35% { transform: scale(1) } 100% { transform: scale(1.08) }' };
 const HAND_FLAP:        Pose = { hand: '0%, 100% { transform: rotate(-10deg) } 50% { transform: rotate(10deg) }' };
 const HAND_SWAY:        Pose = { hand: '0%, 100% { transform: rotate(-6deg) translateX(0) } 50% { transform: rotate(6deg) translateX(4px) }' };
-const HAND_EXTEND:      Pose = { hand: '0%, 100% { transform: translateX(0) } 50% { transform: translateX(8px) }' };
+const HAND_EXTEND:      Pose = { hand: '0%, 100% { transform: translateX(0) } 50% { transform: translateX(18px) }' };
 const HAND_FLEX_DOWN:   Pose = { hand: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(-30deg) }' };
 const HAND_FLEX_UP:     Pose = { hand: '0%, 100% { transform: rotate(0deg) } 50% { transform: rotate(30deg) }' };
 const HAND_TURN:        Pose = { hand: '0%, 50%, 100% { transform: rotate(0deg) } 25% { transform: rotate(-25deg) } 75% { transform: rotate(25deg) }' };
@@ -286,7 +293,7 @@ export const getTherapyExercise = (
       ALEDANAS: [
         { instruction: 'Mueve suavemente los hombros. Ayuda a liberar tu cuello.', duration: '4s', poses: SHOULDER_ROLL },
         { instruction: 'Saca pecho y relaja. Quitamos peso de las cervicales.',    duration: '4s', poses: CHEST_PUFF },
-        { instruction: 'Pequeños círculos con la espalda alta. Todo se conecta.',  duration: '5s', poses: TRUNK_TWIST },
+        { instruction: 'Mueve la espalda alta de un lado al otro suavemente. Todo se conecta.',  duration: '5s', poses: TRUNK_TWIST },
       ],
       ESPECIFICOS: [
         { id: 'flexion',   instruction: 'Baja la barbilla. Estira sin forzar.',                    duration: '4s', poses: HEAD_FLEX },
@@ -304,8 +311,8 @@ export const getTherapyExercise = (
     hombro: {
       RESPIRACION: [
         { instruction: 'Inhala profundamente hacia tu caja torácica.', duration: '5s', poses: BREATHE_CHEST },
-        { instruction: 'Exhala soltando el peso de los brazos.',       duration: '7s', poses: BREATHE_RELEASE },
-        { instruction: 'Relaja la mandíbula al respirar. Esto calma el hombro.', duration: '6s', poses: BREATHE_BELLY },
+        { instruction: 'Exhala lentamente. Tu sistema baja la tensión.',       duration: '7s', poses: BREATHE_RELEASE },
+        { instruction: 'Inhala lento y profundo. Calmas todo el sistema nervioso.', duration: '6s', poses: BREATHE_BELLY },
       ],
       ALEDANAS: [
         { instruction: 'Mueve el cuello hacia la izquierda. El nervio de tu brazo nace aquí.', duration: '4s', poses: NECK_TILT_LEFT },
@@ -313,7 +320,7 @@ export const getTherapyExercise = (
         { instruction: 'Saca pecho y junta los omóplatos. Mejora tu base.',                    duration: '4s', poses: CHEST_PUFF },
       ],
       ESPECIFICOS: [
-        { id: 'flexion',   instruction: 'Levanta el brazo al frente cómodamente.',                       duration: '4s', poses: ARM_FLEXION },
+        { id: 'flexion',   instruction: 'Levanta los brazos al frente y hacia arriba, como si saludaras a lo lejos.', duration: '4s', poses: ARM_FLEXION },
         { id: 'abduccion', instruction: 'Levanta el brazo a los lados. Estás ganando movilidad.',        duration: '4s', poses: ARM_ABDUCTION },
         { id: 'rotacion',  instruction: 'Lleva la mano al hombro contrario y vuelve. Tu hombro es fuerte.', duration: '4s', poses: ARM_CROSS_BODY },
         { id: 'extra',     instruction: 'Levanta ambos brazos como alas grandes. Fluye.',                duration: '1.6s', poses: ARM_WINGS },
@@ -339,7 +346,7 @@ export const getTherapyExercise = (
       ESPECIFICOS: [
         { id: 'flexion',   instruction: 'Agáchate un poco al piso. Tus discos son una maravilla natural resistente.', duration: '4s', poses: LUMBAR_FLEX },
         { id: 'extension', instruction: 'Estírate hacia atrás suavemente. La espalda soporta curvas.',                duration: '4s', poses: LUMBAR_EXT },
-        { id: 'lateral',   instruction: 'Inclinación a un lado. Abre tus costillas con confianza.',                   duration: '4s', poses: LUMBAR_LATERAL },
+        { id: 'lateral',   instruction: 'Mueve la espalda baja a un lado y al otro. Abre tus costillas con confianza.', duration: '4s', poses: LUMBAR_LATERAL },
         { id: 'rotacion',  instruction: 'Giro de torso. Los rotadores espinales disfrutan este estirón.',             duration: '5s', poses: LUMBAR_ROT },
       ],
       COMPUESTOS: [
@@ -357,14 +364,14 @@ export const getTherapyExercise = (
       ],
       ALEDANAS: [
         { instruction: 'Mueve rodillas despacio. Tus piernas cargan tu cadera.',     duration: '4s', poses: LEG_ACTIVATE },
-        { instruction: 'Activa tu espalda baja sin mover la cadera.',                duration: '4s', poses: PELVIC_TILT },
+        { instruction: 'Mueve sutilmente la pelvis adelante y atrás. La cadera permanece estable.', duration: '4s', poses: PELVIC_TILT },
         { instruction: 'Camina suave en el lugar. Despiertas piernas y tobillos.',   duration: '1.6s', poses: WALK },
       ],
       ESPECIFICOS: [
         { id: 'flexion',   instruction: 'Lleva rodilla al pecho (imaginación). La cadera flexiona sin dolor.', duration: '4s', poses: KNEE_TO_CHEST },
         { id: 'extension', instruction: 'Pierna atrás. Tus glúteos despiertan y ayudan al fémur.',             duration: '4s', poses: LEG_BACK },
-        { id: 'rotacion',  instruction: 'Rota la pierna hacia afuera tranquilamente.',                         duration: '5s', poses: HIP_EXT_ROT },
-        { id: 'extra',     instruction: 'Abre ambas piernas sutilmente. Eres móvil.',                          duration: '4s', poses: LEGS_OPEN },
+        { id: 'rotacion',  instruction: 'Lleva la pierna adelante y atrás suavemente, activando la cadera.', duration: '5s', poses: HIP_SWING },
+        { id: 'extra',     instruction: 'Extiende una pierna adelante y otra atrás. Movilizas toda la cadera.', duration: '4s', poses: LEGS_OPEN },
       ],
       COMPUESTOS: [
         { instruction: 'Sentadilla asistida tocando silla.',                         duration: '4s', poses: SQUAT_CHAIR, prop: 'chair' },
@@ -392,8 +399,8 @@ export const getTherapyExercise = (
       ],
       COMPUESTOS: [
         { instruction: 'Toma aire mientras levantas una pesita ligera (o un vaso de agua).', duration: '4s', poses: HAND_LIFT, prop: 'weight' },
-        { instruction: 'Empuja la pared con ambas manos, usando toda la cadena.',            duration: '4s', poses: HAND_EXTEND, prop: 'wall' },
-        { instruction: 'Estiramiento integral de todo el brazo rotando el torso.',           duration: '5s', poses: HAND_TURN },
+        { instruction: 'Empuja la pared con tu mano (imagina la otra haciendo lo mismo). Activas toda la cadena del brazo.', duration: '4s', poses: HAND_EXTEND, prop: 'wall' },
+        { instruction: 'Rota la muñeca despacio mientras imaginas tu torso girando. Estiras toda la cadena.', duration: '5s', poses: HAND_TURN },
       ],
     },
   };
